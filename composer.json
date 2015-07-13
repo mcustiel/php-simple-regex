@@ -1,0 +1,31 @@
+{
+	"keywords" : [
+		"regular expressions",
+		"regex",
+		"oop",
+		"library"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"Mcustiel\\PhpSimpleRegex\\" : "src"
+		}
+	},
+	"autoload-dev": {
+        "psr-4": { "Test\\Mcustiel\\PhpSimpleRegex\\": "tests/unit" }
+    }
+	"name" : "mcustiel/php-simple-regex",
+	"type" : "library",
+	"description" : "This is a library with a set of utils to execute and get the response from regular expressions",
+	"license" : "GPL-3.0+",
+	"require" : {
+		"php" : ">=5.5"
+	},
+	"require-dev" : {
+        "phpunit/phpunit" : ">=4.7.7",
+        "phing/phing" : ">=2.11.0",
+        "squizlabs/php_codesniffer" : ">=2.3.3",
+        "phpmd/phpmd" : ">=2.2.3",
+        "sebastian/phpcpd" : ">=2.0.2",
+        "verbalexpressions/php-verbal-expressions" : "dev-master"
+    }
+}
