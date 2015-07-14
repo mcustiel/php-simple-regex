@@ -2,6 +2,7 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ *
  * @author mcustiel
  */
 class ReplaceResponse
@@ -10,7 +11,8 @@ class ReplaceResponse
     private $replacements;
 
     /**
-     * @param string  $result
+     *
+     * @param string $result
      * @param integer $replacements
      */
     public function __construct($result, $replacements)
@@ -20,7 +22,6 @@ class ReplaceResponse
     }
 
     /**
-     *
      */
     public function getResult()
     {
@@ -28,7 +29,6 @@ class ReplaceResponse
     }
 
     /**
-     *
      */
     public function getReplacements()
     {

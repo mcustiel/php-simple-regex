@@ -2,25 +2,29 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ *
  * @author mcustiel
  *
  */
 class RegexResponse implements \Iterator
 {
-    private $response;
+    protected $response;
     private $current;
     private $count;
 
     /**
+     *
      * @param array $regex
      */
-    public function __construct(array $regexResponse) {
+    public function __construct(array $regexResponse)
+    {
         $this->response = $regexResponse;
         $this->count = count($this->response);
         $this->current = 0;
     }
 
     /**
+     *
      * @return number
      */
     public function getMatchesCount()
@@ -29,13 +33,14 @@ class RegexResponse implements \Iterator
     }
 
     /**
+     *
      * @param unknown $index
      * @throws \OutOfBoundsException
      * @return \Mcustiel\PhpSimpleRegex\Match
      */
     public function getMatchAt($index)
     {
-        if (!isset($this->response[$index])) {
+        if (! isset($this->response[$index])) {
             throw new \OutOfBoundsException('Trying to access a match at an invalid index');
         }
 
@@ -47,24 +52,23 @@ class RegexResponse implements \Iterator
         return new Match($this->response[$this->current]);
     }
 
-	public function next()
-	{
+    public function next()
+    {
+        ++ $this->current;
+    }
 
-	    return new Match($this->response[++$this->current]);
-	}
-
-	public function key()
-	{
+    public function key()
+    {
         return $this->current;
-	}
+    }
 
-	public function valid()
-	{
+    public function valid()
+    {
         return $this->current < $this->count;
-	}
+    }
 
-	public function rewind ()
-	{
+    public function rewind()
+    {
         $this->current = 0;
-	}
+    }
 }

@@ -2,12 +2,15 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ *
  * @author mcustiel
  *
  */
 class RegexExecutor
 {
+
     /**
+     *
      * @param string $pattern
      * @param string $subject
      * @param number $offset

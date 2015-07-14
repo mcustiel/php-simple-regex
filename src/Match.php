@@ -2,38 +2,24 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ *
  * @author mcustiel
  *
  */
-class Match extends \ArrayIterator
+class Match extends AbstractMatch
 {
     /**
-     * @param array $responseElement
-     */
-    public function __construct(array $responseElement)
-    {
-        parent::__construct($responseElement);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFullMatch()
-    {
-        return parent::offsetGet(0);
-    }
-
-    /**
+     *
      * @param unknown $index
      * @throws \OutOfBoundsException
      * @return mixed
      */
-    public function getMatchAt($index)
+    public function getSubMatchAt($index)
     {
-        if (!parent::offsetExists($index)) {
+        if (! isset($this->element[$index]) || $index == 0) {
             throw new \OutOfBoundsException('Trying to access invalid submatch index');
         }
 
-        return parent::offsetGet($index);
+        return $this->element[$index];
     }
 }

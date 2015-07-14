@@ -36,7 +36,7 @@ class MatchTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnTheInnerMatch()
     {
-        $this->assertEquals('123456', $this->result->getMatchAt(1));
+        $this->assertEquals('123456', $this->result->getSubMatchAt(1));
     }
 
     /**
@@ -46,6 +46,6 @@ class MatchTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldThrowAnExceptionWhenOffsetIsNotValid()
     {
-        $this->result->getMatchAt(2);
+        $this->result->getSubMatchAt(2);
     }
 }
