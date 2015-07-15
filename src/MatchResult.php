@@ -6,7 +6,7 @@ namespace Mcustiel\PhpSimpleRegex;
  * @author mcustiel
  *
  */
-class RegexResponse implements \Iterator
+class MatchResult implements \Iterator
 {
     protected $response;
     private $current;

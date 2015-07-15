@@ -4,8 +4,9 @@ namespace Mcustiel\PhpSimpleRegex;
 /**
  *
  * @author mcustiel
+ * @codeCoverageIgnore
  */
-class ReplaceResponse
+class ReplaceResult
 {
     private $result;
     private $replacements;

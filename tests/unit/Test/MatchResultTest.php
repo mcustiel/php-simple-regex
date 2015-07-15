@@ -1,8 +1,9 @@
 <?php
 namespace Test\Mcustiel\PhpSimpleRegex;
 
-use Mcustiel\PhpSimpleRegex\RegexResponse;
 use Mcustiel\PhpSimpleRegex\Match;
+use Mcustiel\PhpSimpleRegex\MatchResult;
+
 class RegexResponseTest extends \PHPUnit_Framework_TestCase
 {
     const PATTERN = '|(\d{4})-(\d{2})-(\d{2})|';
@@ -17,8 +18,8 @@ class RegexResponseTest extends \PHPUnit_Framework_TestCase
     public function createRegexResult()
     {
         $result = [];
-        preg_match_all(self::PATTERN, self::SUBJECT, $result, PREG_SET_ORDER);
-        $this->result = new RegexResponse($result);
+        preg_match_all(self::PATTERN, self::SUBJECT, $result, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
+        $this->result = new MatchResult($result);
     }
 
     /**
