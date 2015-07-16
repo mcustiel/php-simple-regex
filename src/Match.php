@@ -25,7 +25,7 @@ class Match
 
     /**
      *
-     * @return mixed
+     * @return null|string
      */
     public function getFullMatch()
     {
@@ -33,10 +33,18 @@ class Match
     }
 
     /**
+     * @return null|int
+     */
+    public function getOffset()
+    {
+        return empty($this->element) ? null : $this->element[0][1];
+    }
+
+    /**
      *
-     * @param unknown $index
+     * @param int $index
      * @throws \OutOfBoundsException
-     * @return mixed
+     * @return string
      */
     public function getSubMatchAt($index)
     {
@@ -45,12 +53,21 @@ class Match
         return $this->element[$index][0];
     }
 
+    /**
+     * @param int $index
+     * @throws \OutOfBoundsException
+     * @return int
+     */
     public function getSubmatchOffsetAt($index)
     {
         $this->validateIndex($index);
         return $this->element[$index][1];
     }
 
+    /**
+     * @param int $index
+     * @throws \OutOfBoundsException
+     */
     private function validateIndex($index)
     {
         if (! isset($this->element[$index]) || $index == 0) {

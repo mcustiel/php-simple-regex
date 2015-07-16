@@ -34,12 +34,19 @@ class MatchTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function shouldReturnTheOffset()
+    {
+        $this->assertEquals(0, $this->result->getOffset());
+    }
+
+    /**
+     * @test
+     */
     public function shouldReturnTheOffsetOfTheInnerMatch()
     {
         $this->assertEquals(1, $this->result->getSubmatchOffsetAt(1));
         $this->assertEquals(5, $this->result->getSubmatchOffsetAt(2));
     }
-
 
     /**
      * @test

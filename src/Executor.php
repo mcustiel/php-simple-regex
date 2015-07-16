@@ -17,18 +17,23 @@ class Executor
      * @param number
      *          $offset
      *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
      * @return \Mcustiel\PhpSimpleRegex\MatchResult
      */
     public function getAllMatches($pattern, $subject, $offset = 0)
     {
         $matches = array();
-        preg_match_all(
+        $result = @preg_match_all(
             $this->getPatternByType($pattern),
             $subject,
             $matches,
             PREG_SET_ORDER | PREG_OFFSET_CAPTURE,
             $offset
         );
+
+        $this->checkResultIsOkOrThrowException($result, $pattern);
 
         return new MatchResult($matches);
     }
@@ -41,16 +46,18 @@ class Executor
      * @param number
      *          $offset
      *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
      * @return \Mcustiel\PhpSimpleRegex\MatchResult|NULL
      */
     public function getOneMatch($pattern, $subject, $offset = 0)
     {
         $matches = array();
         $pattern = $this->getPatternByType($pattern);
-        if (preg_match($pattern, $subject, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE, $offset)) {
-            return (new MatchResult($matches))->getMatchAt(0);
-        }
-        return null;
+        $result = @preg_match($pattern, $subject, $matches, PREG_OFFSET_CAPTURE, $offset);
+        $this->checkResultIsOkOrThrowException($result, $pattern);
+        return $result? new Match($matches) : null;
     }
 
     /**
@@ -61,17 +68,23 @@ class Executor
      * @param number
      *          $offset
      *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
      * @return boolean
      */
     public function match($pattern, $subject, $offset = 0)
     {
-        return (bool) preg_match(
+        $matches = [];
+        $result = @preg_match(
             $this->getPatternByType($pattern),
             $subject,
-            null,
-            PREG_PATTERN_ORDER,
+            $matches,
+            0,
             $offset
         );
+        $this->checkResultIsOkOrThrowException($result, $pattern);
+        return (boolean) $result;
     }
 
     /**
@@ -83,6 +96,9 @@ class Executor
      *          $subject
      * @param number
      *          $limit
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      *
      * @return \Mcustiel\PhpSimpleRegex\ReplaceResult
      */
@@ -104,6 +120,9 @@ class Executor
      * @param number
      *          $limit
      *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
      * @return string
      */
     public function replace($pattern, $replacement, $subject, $limit = -1)
@@ -121,6 +140,9 @@ class Executor
      * @param number
      *          $limit
      *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     *
      * @return string
      */
     public function replaceCallback($pattern, callable $callback, $subject, $limit = -1)
@@ -137,6 +159,8 @@ class Executor
      *          $subject
      * @param number
      *          $limit
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      *
      * @return \Mcustiel\PhpSimpleRegex\ReplaceResult
      */
@@ -151,7 +175,7 @@ class Executor
     /**
      * @param mixed $pattern
      * @throws \InvalidArgumentException
-     * @return unknown
+     * @return string
      */
     private function getPatternByType($pattern)
     {
@@ -170,5 +194,17 @@ class Executor
             . 'VerbalExpressions\PHPVerbalExpressions\VerbalExpressions '
             . ' or an instance of SelvinOrtiz\Utils\Flux\Flux'
         );
+    }
+
+    /**
+     * @param string $pattern
+     * @param boolean $result
+     * @throws \RuntimeException
+     */
+    private function checkResultIsOkOrThrowException($result, $pattern)
+    {
+        if ($result === false) {
+            throw new \RuntimeException('An error occurred executing the pattern ' . $pattern);
+        }
     }
 }

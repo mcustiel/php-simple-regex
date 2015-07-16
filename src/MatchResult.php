@@ -8,8 +8,17 @@ namespace Mcustiel\PhpSimpleRegex;
  */
 class MatchResult implements \Iterator
 {
+    /**
+     * @var array
+     */
     protected $response;
+    /**
+     * @var int
+     */
     private $current;
+    /**
+     * @var int
+     */
     private $count;
 
     /**
@@ -25,7 +34,7 @@ class MatchResult implements \Iterator
 
     /**
      *
-     * @return number
+     * @return int
      */
     public function getMatchesCount()
     {
@@ -34,19 +43,22 @@ class MatchResult implements \Iterator
 
     /**
      *
-     * @param unknown $index
+     * @param int $index
      * @throws \OutOfBoundsException
      * @return \Mcustiel\PhpSimpleRegex\Match
      */
     public function getMatchAt($index)
     {
-        if (! isset($this->response[$index])) {
+        if (!isset($this->response[$index])) {
             throw new \OutOfBoundsException('Trying to access a match at an invalid index');
         }
 
         return new Match($this->response[$index]);
     }
 
+    /**
+     * @return \Mcustiel\PhpSimpleRegex\Match
+     */
     public function current()
     {
         return new Match($this->response[$this->current]);
