@@ -2,13 +2,15 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ * Facade class that wraps preg_* functions and returns the result of calling this function in an
+ * object oriented way when necessary.
  *
  * @author mcustiel
- *
  */
 class Executor
 {
     /**
+     * Searches for all matches for the given pattern.
      *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
@@ -39,6 +41,8 @@ class Executor
     }
 
     /**
+     * Searches for matches for the given pattern and returns the first match.
+     *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
      * @param string
@@ -61,6 +65,8 @@ class Executor
     }
 
     /**
+     * Checks weather the string matches the given pattern.
+     *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
      * @param string
@@ -88,11 +94,14 @@ class Executor
     }
 
     /**
+     * Replaces all occurrences of $pattern with $replacement in $subject and returns the result and number
+     * of replacements done.
+     *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
      * @param string
      *          $replacement
-     * @param string
+     * @param string|array
      *          $subject
      * @param number
      *          $limit
@@ -105,17 +114,31 @@ class Executor
     public function replaceAndCount($pattern, $replacement, $subject, $limit = -1)
     {
         $count = 0;
-        $replaced = preg_replace($this->getPatternByType($pattern), $replacement, $subject, $limit, $count);
+        $replaced = @preg_replace(
+            $this->getPatternByType($pattern),
+            $replacement,
+            $subject,
+            $limit,
+            $count
+        );
+
+        if ($replaced === null) {
+            throw new \RuntimeException(
+                'An error occurred replacing the pattern ' . var_export($pattern, true)
+            );
+        }
 
         return new ReplaceResult($replaced, $count);
     }
 
     /**
+     * Replaces all occurrences of $pattern with $replacement in $subject and returns the replaced subject.
+     *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
      * @param string
      *          $replacement
-     * @param string
+     * @param string|array
      *          $subject
      * @param number
      *          $limit
@@ -123,19 +146,34 @@ class Executor
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      *
-     * @return string
+     * @return string|array
      */
     public function replace($pattern, $replacement, $subject, $limit = -1)
     {
-        return preg_replace($this->getPatternByType($pattern), $replacement, $subject, $limit);
+        $replaced = @preg_replace(
+            $this->getPatternByType($pattern),
+            $replacement,
+            $subject,
+            $limit
+        );
+        if ($replaced === null) {
+            throw new \RuntimeException(
+                'An error occurred replacing the pattern ' . var_export($pattern, true)
+            );
+        }
+
+        return $replaced;
     }
 
     /**
+     * Replaces all occurrences of $pattern using $callback function in $subject
+     * and returns the replaced subject.
+     *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
      * @param callable
      *          $callback
-     * @param string
+     * @param string|array
      *          $subject
      * @param number
      *          $limit
@@ -143,19 +181,34 @@ class Executor
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      *
-     * @return string
+     * @return string|array
      */
     public function replaceCallback($pattern, callable $callback, $subject, $limit = -1)
     {
-        return preg_replace_callback($this->getPatternByType($pattern), $callback, $subject, $limit);
+        $replaced = @preg_replace_callback(
+            $this->getPatternByType($pattern),
+            $callback,
+            $subject,
+            $limit
+        );
+        if ($replaced === null) {
+            throw new \RuntimeException(
+                'An error occurred replacing the pattern ' . var_export($pattern, true)
+            );
+        }
+
+        return $replaced;
     }
 
     /**
+     * Replaces all occurrences of $pattern using $callback function in $subject
+     * and returns the replaced subject and the number of replacements done.
+     *
      * @param string|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions|SelvinOrtiz\Utils\Flux\Flux
      *          $pattern
      * @param callable
      *          $callback
-     * @param string
+     * @param string|array
      *          $subject
      * @param number
      *          $limit
@@ -167,7 +220,13 @@ class Executor
     public function replaceCallbackAndCount($pattern, callable $callback, $subject, $limit = -1)
     {
         $count = 0;
-        $result = preg_replace_callback($this->getPatternByType($pattern), $callback, $subject, $limit);
+        $result = preg_replace_callback(
+            $this->getPatternByType($pattern),
+            $callback,
+            $subject,
+            $limit,
+            $count
+        );
 
         return new ReplaceResult($result, $count);
     }

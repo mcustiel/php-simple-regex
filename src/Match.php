@@ -2,9 +2,10 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ * Represents a match in a collection of matches obtained of checking a string against
+ * a regular expression.
  *
  * @author mcustiel
- *
  */
 class Match
 {
@@ -15,6 +16,7 @@ class Match
     protected $element;
 
     /**
+     * Class constructor.
      *
      * @param array $responseElement
      */
@@ -24,6 +26,7 @@ class Match
     }
 
     /**
+     * Returns the full match string that matches the whole pattern. Null if no match found.
      *
      * @return null|string
      */
@@ -33,6 +36,9 @@ class Match
     }
 
     /**
+     * Returns the offset of the string that matches the whole pattern in the subject
+     * string, null if no match found.
+     *
      * @return null|int
      */
     public function getOffset()
@@ -41,8 +47,10 @@ class Match
     }
 
     /**
+     * Returns the string matching a subpattern of a pattern, giving it's index.
      *
      * @param int $index
+     *
      * @throws \OutOfBoundsException
      * @return string
      */
@@ -54,7 +62,10 @@ class Match
     }
 
     /**
+     * Returns the offset of the string matching a subpattern of a pattern, giving it's index.
+     *
      * @param int $index
+     *
      * @throws \OutOfBoundsException
      * @return int
      */
@@ -65,6 +76,8 @@ class Match
     }
 
     /**
+     * Validates the index of a subpattern.
+     *
      * @param int $index
      * @throws \OutOfBoundsException
      */

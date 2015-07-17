@@ -2,16 +2,24 @@
 namespace Mcustiel\PhpSimpleRegex;
 
 /**
+ * Represents the result of calling a preg_replace_* function and requesting the count of replacements.
  *
  * @author mcustiel
  * @codeCoverageIgnore
  */
 class ReplaceResult
 {
+    /**
+     * @var string
+     */
     private $result;
+    /**
+     * @var integer
+     */
     private $replacements;
 
     /**
+     * Class constructor.
      *
      * @param string $result
      * @param integer $replacements
@@ -23,6 +31,7 @@ class ReplaceResult
     }
 
     /**
+     * @return string
      */
     public function getResult()
     {
@@ -30,6 +39,7 @@ class ReplaceResult
     }
 
     /**
+     * @return number
      */
     public function getReplacements()
     {
