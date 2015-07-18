@@ -53,7 +53,7 @@ class Executor
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      *
-     * @return \Mcustiel\PhpSimpleRegex\MatchResult|NULL
+     * @return \Mcustiel\PhpSimpleRegex\Match|NULL
      */
     public function getOneMatch($pattern, $subject, $offset = 0)
     {
