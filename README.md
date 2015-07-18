@@ -47,11 +47,11 @@ $regexFacade = new RegexExecutor();
 
 #### List of methods:
 
-* MatchResult getAllMatches(string $pattern, string $subject, integer $offset = 0)
-* Match getOneMatch(string $pattern, string $subject, integer $offset = 0)
-* boolean match(string $pattern, string $subject, integer $offset = 0)
-* ReplaceResult replaceAndCount(string $pattern, string $replacement, mixed $subject, integer $limit = -1)
-* mixed replace(string $pattern, string $replacement, mixed $subject, integer $limit = -1)
-* mixed replaceCallback(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
-* ReplaceResult replaceCallbackAndCount(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
+* MatchResult __getAllMatches__(string $pattern, string $subject, integer $offset = 0)
+* Match __getOneMatch__(string $pattern, string $subject, integer $offset = 0)
+* boolean __match__(string $pattern, string $subject, integer $offset = 0)
+* ReplaceResult __replaceAndCount__(string $pattern, string $replacement, mixed $subject, integer $limit = -1)
+* mixed __replace__(string $pattern, string $replacement, mixed $subject, integer $limit = -1)
+* mixed __replaceCallback__(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
+* ReplaceResult __replaceCallbackAndCount__(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
 
