@@ -55,3 +55,49 @@ $regexFacade = new RegexExecutor();
 * mixed __replaceCallback__(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
 * ReplaceResult __replaceCallbackAndCount__(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
 
+For each method, the pattern can be a string, a Flux object, or a PhpVerbalExpression object.
+
+Examples:
+---------
+
+#### getAllMatches:
+
+```php
+try {
+    $result = $regexFacade->getAllMatches('/\d+/', 'ab12cd34ef56');
+    echo 'Number of matches: ' . $result->getMatchesCount() . PHP_EOL; // Prints 3
+    echo 'First match: ' . $result->getMatchAt(0)->getFullMatch() . PHP_EOL; // Prints 12
+    
+    // Iterate over results
+    foreach ($result as $index => $match) {
+        echo "Match at index {$index} is " . $match->getFullMatch() . PHP_EOL; 
+    }
+} catch (\Exception $e) {
+    echo 'An error occurred executing getAllMatches';
+}
+```
+
+#### getOneMatch:
+
+```php
+try {
+    $result = $regexFacade->getOneMatches('/\d+/', 'ab12cd34ef56');
+    if (!empty($result)) {
+        echo 'Match: ' . $result->getFullMatch() . PHP_EOL; // Prints 12
+    }
+} catch (\Exception $e) {
+    echo 'An error occurred executing getOneMatch';
+}
+```
+
+#### replaceAndCount:
+
+```php
+try {
+    $result = $this->executor->replaceAndCount('/\d+/', 'potato', 'ab12cd34ef56');
+    echo 'Number of replacements: ' . $result->getReplacements() . PHP_EOL;
+    echo 'Replaced string: ' . $result->getResult() . PHP_EOL;
+} catch (\Exception $e) {
+    echo 'An error occurred executing replaceAndCount';
+}
+```
