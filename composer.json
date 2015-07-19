@@ -25,7 +25,7 @@
 	"type" : "library",
 	"description" : "This is a library with a set of utils to execute and get the response from regular expressions",
 	"license" : "GPL-3.0+",
-	"version" : "1.0.0", 
+	"version" : "1.0.2", 
 	"require" : {
 		"php" : ">=5.5"
 	},
