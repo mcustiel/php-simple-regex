@@ -6,6 +6,11 @@
 		<!-- CHANGE TO "." WHEN OTHER BILLING TESTS OK -->
 		<directory>./unit</directory>
 	</testsuite>
+	<filter>
+        <blacklist>
+            <directory suffix=".php">../vendor</directory>
+        </blacklist>
+    </filter>
 	<php>
 	</php>
 </phpunit>

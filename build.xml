@@ -130,14 +130,6 @@
 	<!-- ============================================ -->
 	<target name="unittests">
 		<echo msg="Running unit tests..." />
-		<phpunit>
-		  <formatter type="clover" toDir="build/reports/coverage" />
-		  <formatter type="xml" outfile="build/reports/phpunit.xml" />
-		  <formatter type="summary" outfile="build/reports/phpunit.xml" />
-		  <batchtest>
-		    <fileset dir="${dir.tests}" />
-		  </batchtest>
-		</phpunit>
 		<exec command="./vendor/bin/phpunit -d zend.enable_gc=0 --log-junit ${dir.reports}/phpunit/phpunit.xml --coverage-clover ${dir.reports.coverage}/clover.xml --coverage-html ${dir.reports.coverage}/ --testdox-html ${dir.reports}/phpunit/testdox.html -c ${dir.tests}" outputProperty="output" returnProperty="returnout" />
 		<echo msg="${output}" />
 		<if>

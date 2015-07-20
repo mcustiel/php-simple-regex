@@ -90,14 +90,66 @@ try {
 }
 ```
 
+#### match:
+
+```php
+try {
+    if ($regexFacade->match('/\d+/', 'ab12cd34ef56')) {
+        echo 'String matches pattern.'. PHP_EOL;
+    } else {
+        echo 'String does not match pattern.'. PHP_EOL;
+    }
+} catch (\Exception $e) {
+    echo 'An error occurred executing match';
+}
+```
+
 #### replaceAndCount:
 
 ```php
 try {
+    // Subject can also be an array.
     $result = $this->executor->replaceAndCount('/\d+/', 'potato', 'ab12cd34ef56');
     echo 'Number of replacements: ' . $result->getReplacements() . PHP_EOL;
     echo 'Replaced string: ' . $result->getResult() . PHP_EOL;
 } catch (\Exception $e) {
     echo 'An error occurred executing replaceAndCount';
+}
+```
+
+#### replace:
+
+```php
+try {
+    // Subject can also be a string.
+    $result = $this->executor->replaceAndCount('/\d+/', 'potato', ['ab12cd34ef56', 'ab12cd78ef90']);
+    echo 'Replaced strings: ' . print_r($result->getResult(), true) . PHP_EOL;
+} catch (\Exception $e) {
+    echo 'An error occurred executing replace';
+}
+```
+
+#### replaceCallback:
+
+```php
+try {
+    // Subject can also be an array.
+    $result = $this->executor->replaceCallback('/\d+/', function () { return 'potato'; }, 'ab12cd34ef56');
+    echo 'Replaced string: ' . $result->getResult() . PHP_EOL;
+} catch (\Exception $e) {
+    echo 'An error occurred executing replaceCallback';
+}
+```
+
+#### replaceCallbackAndCount:
+
+```php
+try {
+    // Subject can also be an array.
+    $result = $this->executor->replaceCallback('/\d+/', function () { return 'potato'; }, 'ab12cd34ef56');
+    echo 'Number of replacements: ' . $result->getReplacements() . PHP_EOL;
+    echo 'Replaced string: ' . $result->getResult() . PHP_EOL;
+} catch (\Exception $e) {
+    echo 'An error occurred executing replaceCallbackAndCount';
 }
 ```
