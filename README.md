@@ -5,7 +5,7 @@ What is it
 
 PhpSimpleRegex is an object oriented regular expressions library for PHP.
 
-This library allows to execute preg_* functions in PHP and use the results as objects, making the use of preg_* functions testeable. PhpSimpleRegex is integrated with [PhpVerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions) and [Flux](https://github.com/selvinortiz/flux), to allow a full Object Oriented approach to Regular Expressions in PHP.
+This library allows to execute preg_* functions in PHP and use the results as objects, making the use of preg_* functions testeable. PhpSimpleRegex is integrated with [\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions), [SelvinOrtiz\Utils\Flux\Flux](https://github.com/selvinortiz/flux) and also [MarkWilson\VerbalExpression](https://github.com/markwilson/VerbalExpressionsPhp) to allow a full Object Oriented approach to Regular Expressions in PHP.
 
 #### Why Simple?
 
@@ -47,13 +47,16 @@ $regexFacade = new RegexExecutor();
 
 #### List of methods:
 
-* MatchResult __getAllMatches__(string $pattern, string $subject, integer $offset = 0)
-* Match __getOneMatch__(string $pattern, string $subject, integer $offset = 0)
-* boolean __match__(string $pattern, string $subject, integer $offset = 0)
-* ReplaceResult __replaceAndCount__(string $pattern, string $replacement, mixed $subject, integer $limit = -1)
-* mixed __replace__(string $pattern, string $replacement, mixed $subject, integer $limit = -1)
-* mixed __replaceCallback__(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
-* ReplaceResult __replaceCallbackAndCount__(string $pattern, callable $callback, mixed $subject, integer $limit = -1)
+* MatchResult __getAllMatches__(mixed $pattern, string $subject, integer $offset = 0)
+* Match __getOneMatch__(mixed $pattern, string $subject, integer $offset = 0)
+* boolean __match__(mixed $pattern, string $subject, integer $offset = 0)
+* ReplaceResult __replaceAndCount__(mixed $pattern, string $replacement, mixed $subject, integer $limit = -1)
+* mixed __replace__(mixed $pattern, string $replacement, mixed $subject, integer $limit = -1)
+* mixed __replaceCallback__(mixed $pattern, callable $callback, mixed $subject, integer $limit = -1)
+* ReplaceResult __replaceCallbackAndCount__(mixed $pattern, callable $callback, mixed $subject, integer $limit = -1)
+* array __split__(mixed $pattern, string $string, integer $limit = -1, bool $returnOnlyNotEmpty = false, bool $captureOffset = false, bool $captureSubpatterns = false)
+* array __grep__(mixed $pattern, array $input)
+* array __grepNotMatching__(mixed $pattern, array $input)
 
 For each method, the pattern can be a string, a Flux object, or a PhpVerbalExpression object.
 

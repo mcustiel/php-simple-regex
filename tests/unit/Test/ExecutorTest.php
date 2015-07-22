@@ -290,7 +290,7 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->executor->replaceAndCountAndOnlyGetChanged(
             self::PATTERN, 'potato', [self::MATCHING_SUBJECT, self::NOT_MATCHING_SUBJECT]
-            );
+        );
         $this->assertInstanceOf(ReplaceResult::class, $result);
         $this->assertEquals(4, $result->getReplacements());
         $this->assertInternalType('array', $result->getResult());
@@ -318,7 +318,7 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
     {
         $result = $this->executor->replaceAndCountAndOnlyGetChanged(
             self::PATTERN, 'potato', [self::NOT_MATCHING_SUBJECT, self::NOT_MATCHING_SUBJECT]
-            );
+        );
         $this->assertInstanceOf(ReplaceResult::class, $result);
         $this->assertEquals(0, $result->getReplacements());
         $this->assertInternalType('array', $result->getResult());
@@ -375,7 +375,7 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException        \InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage
      *      Pattern must be a string, an instance of \
      *      VerbalExpressions\PHPVerbalExpressions\VerbalExpressions\
@@ -391,5 +391,113 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('a5', $result->getMatchAt(2)->getFullMatch());
         $this->assertEquals('a', $result->getMatchAt(2)->getSubMatchAt(1));
         $this->assertEquals(14, $result->getMatchAt(2)->getSubmatchOffsetAt(1));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnArrayWhenSplitCalledAndEverythingIsOk()
+    {
+        $expected = array ('ab', 'cd', 'ef', 'gh');
+        $response = $this->executor->split('/\d+/', 'ab12cd3ef456gh');
+        $this->assertEquals($expected, $response);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldFailSomehowWhenSplitCalledAndSomethingFails()
+    {
+        $expected = array(
+            0 => array('0', 0),
+            1 => array('zf3nq', 2),
+            2 => array ('bv', 8),
+            3 => array ('4', 10),
+            4 => array ('n', 12)
+        );
+        $response = $this->executor->split('/(\d)?a/', '0azf3nqabv4an', -1, true, true, true);
+        $this->assertEquals($expected, $response);
+    }
+
+    /**
+     * @test
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage An error occurred executing the pattern 'a^b**z'
+     */
+    public function shouldThrowExceptionWhenSplitFails()
+    {
+        $this->executor->split(self::INVALID_PATTERN, 'ab12cd3ef456gh');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnMatchingItems()
+    {
+        $input = array(
+            'abc',
+            'a123',
+            '123',
+            'b432'
+        );
+        $expected = array(
+            1 =>'a123',
+            3 => 'b432'
+        );
+        $result = $this->executor->grep(self::PATTERN, $input);
+        $this->assertEquals($expected, $result);
+
+    }
+
+    /**
+     * @test
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage An error occurred executing the pattern 'a^b**z'
+     */
+    public function shouldThrowExceptionWhenGrepFails()
+    {
+        $input = array(
+            'abc',
+            'a123',
+            '123',
+            'b432'
+        );
+        $this->executor->grep(self::INVALID_PATTERN, $input);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnNotMatchingItems()
+    {
+        $input = array(
+            'abc',
+            'a123',
+            '123',
+            'b432'
+        );
+        $expected = array(
+            0 => 'abc',
+            2 =>  '123',
+        );
+        $result = $this->executor->grepNotMatching(self::PATTERN, $input);
+        $this->assertEquals($expected, $result);
+
+    }
+
+    /**
+     * @test
+     * @expectedException        \RuntimeException
+     * @expectedExceptionMessage An error occurred executing the pattern 'a^b**z'
+     */
+    public function shouldThrowExceptionWhenGrepNotMatchingFails()
+    {
+        $input = array(
+            'abc',
+            'a123',
+            '123',
+            'b432'
+        );
+        $this->executor->grepNotMatching(self::INVALID_PATTERN, $input);
     }
 }
