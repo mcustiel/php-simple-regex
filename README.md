@@ -5,11 +5,7 @@ What is it
 
 PhpSimpleRegex is an object oriented regular expressions library for PHP.
 
-This library allows to execute preg_* functions in PHP and use the results as objects, making the use of preg_* functions testeable. PhpSimpleRegex is integrated with [\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions), [SelvinOrtiz\Utils\Flux\Flux](https://github.com/selvinortiz/flux) and also [MarkWilson\VerbalExpression](https://github.com/markwilson/VerbalExpressionsPhp) to allow a full Object Oriented approach to Regular Expressions in PHP.
-
-#### Why Simple?
-
-My native language is spanish and the spanish definition of simple is __"Que es puramente aquello que se dice, sin ninguna característica especial o singular"__, which somehow translates to __"Something that is nothing more than what is told, without any special or singular characteristic"__. That's what I looked for in the design of this library, to be good in what it's intended for and nothing else.
+This library allows to execute preg_* functions in PHP and use the results as objects, making the use of preg_* functions testeable. PhpSimpleRegex is integrated with [VerbalExpressions\PHPVerbalExpressions\VerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions), [SelvinOrtiz\Utils\Flux\Flux](https://github.com/selvinortiz/flux) and also [MarkWilson\VerbalExpression](https://github.com/markwilson/VerbalExpressionsPhp) to allow a full Object Oriented approach to Regular Expressions in PHP.
 
 Installation
 ------------
@@ -18,16 +14,10 @@ Installation
 
 If you want to access directly to this repo, adding this to your composer.json should be enough:
 
-```javascript  
+```json
 {
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcustiel/php-simple-regex"
-        }
-    ],
     "require": {
-        "mcustiel/php-simple-regex": "dev-master"
+        "mcustiel/php-simple-regex": "*"
     }
 }
 ```
