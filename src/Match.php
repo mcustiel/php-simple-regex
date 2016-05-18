@@ -78,6 +78,19 @@ class Match
     }
 
     /**
+     * Returns the string matching a subpattern of a pattern, giving it's index. If there
+     * is no submatch at that index, return the default value.
+     *
+     * @param int $index
+     *
+     * @return string|mixed
+     */
+    public function getSubMatchOrDefaultAt($index, $default = null)
+    {
+        return isset($this->element[$index][0]) ? $this->element[$index][0] : $default;
+    }
+
+    /**
      * Returns the offset of the string matching a subpattern of a pattern, giving it's index.
      *
      * @param int $index

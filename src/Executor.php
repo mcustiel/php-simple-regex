@@ -57,10 +57,9 @@ class Executor
             return $pattern;
         }
         if (is_object($pattern)) {
-            $class = get_class($pattern);
-            if ($class == 'SelvinOrtiz\Utils\Flux\Flux'
-                || $class == 'VerbalExpressions\PHPVerbalExpressions\VerbalExpressions'
-                || $class == 'MarkWilson\VerbalExpression') {
+            if (is_a($pattern, 'SelvinOrtiz\Utils\Flux\Flux')
+                || is_a($pattern, 'VerbalExpressions\PHPVerbalExpressions\VerbalExpressions')
+                || is_a($pattern, 'MarkWilson\VerbalExpression')) {
                 return $pattern->__toString();
             }
         }
