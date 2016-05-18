@@ -75,6 +75,15 @@ class MatchTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function shouldReturnTheDefaultIfInnerMatchIsNotSet()
+    {
+        $this->assertEquals('potato', $this->result->getSubMatchOrDefaultAt(3, 'potato'));
+        $this->assertNull($this->result->getSubMatchOrDefaultAt(4));
+    }
+
+    /**
+     * @test
      * @expectedException        \OutOfBoundsException
      * @expectedExceptionMessage Trying to access invalid submatch index
      */

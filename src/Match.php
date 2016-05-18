@@ -87,7 +87,7 @@ class Match
      */
     public function getSubMatchOrDefaultAt($index, $default = null)
     {
-        return isset($this->element[$index][0]) ? $this->element[$index][0] : $default;
+        return isset($this->element[$index]) ? $this->element[$index][0] : $default;
     }
 
     /**
@@ -113,7 +113,9 @@ class Match
     private function validateIndex($index)
     {
         if (! isset($this->element[$index]) || $index == 0) {
-            throw new \OutOfBoundsException('Trying to access invalid submatch index');
+            throw new \OutOfBoundsException(
+                'Trying to access invalid submatch index ' . $index . 'in match: ' . $this->getFullMatch()
+            );
         }
     }
 }
