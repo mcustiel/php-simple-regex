@@ -7,10 +7,10 @@
 		<directory>./unit</directory>
 	</testsuite>
 	<filter>
-        <blacklist>
-            <directory suffix=".php">../vendor</directory>
-        </blacklist>
-    </filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">../src</directory>
+		</whitelist>
+	</filter>
 	<php>
 	</php>
 </phpunit>
