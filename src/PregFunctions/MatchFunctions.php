@@ -6,7 +6,6 @@ use Mcustiel\PhpSimpleRegex\Match;
 
 trait MatchFunctions
 {
-
     /**
      * Searches for all matches for the given pattern.
      *
@@ -90,4 +89,19 @@ trait MatchFunctions
         $this->checkResultIsOkOrThrowException($result, $pattern);
         return (boolean) $result;
     }
+
+    /**
+     * @param mixed $pattern
+     * @throws \InvalidArgumentException
+     * @return string
+     */
+    abstract protected function getPatternByType($pattern);
+
+    /**
+     * @param mixed  $result
+     * @param string $pattern
+     *
+     * @throws \RuntimeException
+     */
+    abstract protected function checkResultIsOkOrThrowException($result, $pattern);
 }

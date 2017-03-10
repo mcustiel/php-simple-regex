@@ -37,7 +37,7 @@ class Executor
      * @throws \InvalidArgumentException
      * @return string|array
      */
-    private function getPatternForReplace($pattern)
+    protected function getPatternForReplace($pattern)
     {
         if (is_array($pattern)) {
             return $pattern;
@@ -51,7 +51,7 @@ class Executor
      * @throws \InvalidArgumentException
      * @return string
      */
-    private function getPatternByType($pattern)
+    protected function getPatternByType($pattern)
     {
         if (is_string($pattern)) {
             return $pattern;
@@ -77,7 +77,7 @@ class Executor
      *
      * @throws \RuntimeException
      */
-    private function checkResultIsOkOrThrowException($result, $pattern)
+    protected function checkResultIsOkOrThrowException($result, $pattern)
     {
         if ($result === false) {
             throw new \RuntimeException(
@@ -92,7 +92,7 @@ class Executor
      *
      * @throws \RuntimeException
      */
-    private function checkResultIsOkForReplaceOrThrowException($result, $pattern)
+    protected function checkResultIsOkForReplaceOrThrowException($result, $pattern)
     {
         if ($result === null) {
             throw new \RuntimeException(

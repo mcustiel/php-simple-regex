@@ -33,7 +33,7 @@ trait SplitFunctions
         $captureSubpatterns = false
     ) {
         $result = @preg_split(
-            $this->getPatternForReplace($pattern),
+            $this->getPatternByType($pattern),
             $string,
             $limit,
             ($returnOnlyNotEmpty ? PREG_SPLIT_NO_EMPTY : 0)
@@ -44,4 +44,19 @@ trait SplitFunctions
 
         return $result;
     }
+
+    /**
+     * @param mixed $pattern
+     * @throws \InvalidArgumentException
+     * @return string
+     */
+    abstract protected function getPatternByType($pattern);
+
+    /**
+     * @param mixed  $result
+     * @param string $pattern
+     *
+     * @throws \RuntimeException
+     */
+    abstract protected function checkResultIsOkOrThrowException($result, $pattern);
 }

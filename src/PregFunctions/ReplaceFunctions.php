@@ -193,4 +193,19 @@ trait ReplaceFunctions
 
         return new ReplaceResult($result, $count);
     }
+
+    /**
+     * @param mixed $pattern
+     * @throws \InvalidArgumentException
+     * @return string|array
+     */
+    abstract protected function getPatternForReplace($pattern);
+
+    /**
+     * @param mixed  $result
+     * @param string $pattern
+     *
+     * @throws \RuntimeException
+     */
+    abstract protected function checkResultIsOkForReplaceOrThrowException($result, $pattern);
 }

@@ -16,7 +16,7 @@ trait GrepFunctions
      */
     public function grep($pattern, $input)
     {
-        $result = @preg_grep($this->getPatternForReplace($pattern), $input);
+        $result = @preg_grep($this->getPatternByType($pattern), $input);
         $this->checkResultIsOkOrThrowException($result, $pattern);
 
         return $result;
@@ -35,9 +35,24 @@ trait GrepFunctions
      */
     public function grepNotMatching($pattern, $input)
     {
-        $result = @preg_grep($this->getPatternForReplace($pattern), $input, PREG_GREP_INVERT);
+        $result = @preg_grep($this->getPatternByType($pattern), $input, PREG_GREP_INVERT);
         $this->checkResultIsOkOrThrowException($result, $pattern);
 
         return $result;
     }
+
+    /**
+     * @param mixed $pattern
+     * @throws \InvalidArgumentException
+     * @return string
+     */
+    abstract protected function getPatternByType($pattern);
+
+    /**
+     * @param mixed  $result
+     * @param string $pattern
+     *
+     * @throws \RuntimeException
+     */
+    abstract protected function checkResultIsOkOrThrowException($result, $pattern);
 }
