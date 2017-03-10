@@ -7,6 +7,10 @@ PhpSimpleRegex is an object oriented regular expressions library for PHP.
 
 This library allows to execute preg_* functions in PHP and use the results as objects, making the use of preg_* functions testeable. PhpSimpleRegex is integrated with [VerbalExpressions\PHPVerbalExpressions\VerbalExpressions](https://github.com/VerbalExpressions/PHPVerbalExpressions), [SelvinOrtiz\Utils\Flux\Flux](https://github.com/selvinortiz/flux) and also [MarkWilson\VerbalExpression](https://github.com/markwilson/VerbalExpressionsPhp) to allow a full Object Oriented approach to Regular Expressions in PHP.
 
+[![Build Status](https://scrutinizer-ci.com/g/mcustiel/php-simple-regex/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mcustiel/php-simple-regex/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mcustiel/php-simple-regex/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mcustiel/php-simple-regex/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mcustiel/php-simple-regex/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mcustiel/php-simple-regex/?branch=master)
+
 Installation
 ------------
 
