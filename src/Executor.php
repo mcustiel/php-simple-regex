@@ -35,14 +35,13 @@ class Executor
     /**
      * @param mixed $pattern
      * @throws \InvalidArgumentException
-     * @return string|array
+     * @return string|string[]
      */
     protected function getPatternForReplace($pattern)
     {
         if (is_array($pattern)) {
-            return $pattern;
+            return $this->getPatternsFromArray($pattern);
         }
-
         return $this->getPatternByType($pattern);
     }
 
@@ -56,12 +55,8 @@ class Executor
         if (is_string($pattern)) {
             return $pattern;
         }
-        if (is_object($pattern)) {
-            if (is_a($pattern, 'SelvinOrtiz\Utils\Flux\Flux')
-                || is_a($pattern, 'VerbalExpressions\PHPVerbalExpressions\VerbalExpressions')
-                || is_a($pattern, 'MarkWilson\VerbalExpression')) {
-                return $pattern->__toString();
-            }
+        if ($this->isValidObjectPattern($pattern)) {
+            return $pattern->__toString();
         }
         throw new  \InvalidArgumentException(
             'Pattern must be a string, an instance of '
@@ -99,5 +94,32 @@ class Executor
                 'An error occurred replacing the pattern ' . var_export($pattern, true)
             );
         }
+    }
+
+    /**
+     * @param string[]|\VerbalExpressions\PHPVerbalExpressions\VerbalExpressions[]|SelvinOrtiz\Utils\Flux\Flux[]|MarkWilson\VerbalExpression[] $patterns
+     * @return string[]
+     * @throws \InvalidArgumentException
+     */
+    protected function getPatternsFromArray(array $patterns)
+    {
+        $stringPatterns = [];
+        foreach ($patterns as $pattern) {
+            $stringPatterns[] = $this->getPatternByType($pattern);
+        }
+        return $stringPatterns;
+    }
+
+    /**
+     * @param mixed $pattern
+     * @return bool
+     */
+    private function isValidObjectPattern($pattern)
+    {
+        return is_object($pattern) && (
+            is_a($pattern, 'SelvinOrtiz\Utils\Flux\Flux')
+                || is_a($pattern, 'VerbalExpressions\PHPVerbalExpressions\VerbalExpressions')
+                || is_a($pattern, 'MarkWilson\VerbalExpression')
+        );
     }
 }

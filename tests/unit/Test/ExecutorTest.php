@@ -398,7 +398,7 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
      */
     public function shouldReturnArrayWhenSplitCalledAndEverythingIsOk()
     {
-        $expected = array ('ab', 'cd', 'ef', 'gh');
+        $expected = array('ab', 'cd', 'ef', 'gh');
         $response = $this->executor->split('/\d+/', 'ab12cd3ef456gh');
         $this->assertEquals($expected, $response);
     }
@@ -411,9 +411,9 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
         $expected = array(
             0 => array('0', 0),
             1 => array('zf3nq', 2),
-            2 => array ('bv', 8),
-            3 => array ('4', 10),
-            4 => array ('n', 12)
+            2 => array('bv', 8),
+            3 => array('4', 10),
+            4 => array('n', 12)
         );
         $response = $this->executor->split('/(\d)?a/', '0azf3nqabv4an', -1, true, true, true);
         $this->assertEquals($expected, $response);
@@ -446,7 +446,6 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
         );
         $result = $this->executor->grep(self::PATTERN, $input);
         $this->assertEquals($expected, $result);
-
     }
 
     /**
@@ -482,7 +481,6 @@ class ExecutorTest extends \PHPUnit_Framework_TestCase
         );
         $result = $this->executor->grepNotMatching(self::PATTERN, $input);
         $this->assertEquals($expected, $result);
-
     }
 
     /**
