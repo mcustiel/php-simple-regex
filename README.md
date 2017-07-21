@@ -78,7 +78,7 @@ try {
 
 ```php
 try {
-    $result = $regexFacade->getOneMatches('/\d+/', 'ab12cd34ef56');
+    $result = $regexFacade->getOneMatch('/\d+/', 'ab12cd34ef56');
     if (!empty($result)) {
         echo 'Match: ' . $result->getFullMatch() . PHP_EOL; // Prints 12
     }
